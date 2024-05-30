@@ -25,6 +25,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+        pip install flake8
+    - name: Run Linting
       run: |
-        python manage.py test
+        flake8 .
+    - name: Upload Linting Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: flake8-report
+        path: flake8-report.txt
